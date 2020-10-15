@@ -1,0 +1,54 @@
+ID: VisualQuality
+_schema-version: '2.1'
+description: Visual Quality Framework
+version: 0.0.1
+
+modules:
+ - name: DB_Module
+   type: hdb
+   path: DB_Module
+   requires:
+    - name: hdi_DB_Module
+
+
+ - name: Node_Module
+   type: nodejs
+   path: Node_Module
+   provides:
+    - name: Node_Module_api
+      properties:
+         url: ${default-url}
+
+
+ - name: UI_Module
+   type: html5
+   path: UI_Module
+   parameters:
+      disk-quota: 512M
+      memory: 256M
+   build-parameters:
+      builder: grunt
+   requires:
+    - name: uaa_VisualQuality
+    - name: dest_VisualQuality
+
+resources:
+ - name: hdi_DB_Module
+   properties:
+      hdi-container-name: ${service-name}
+   type: com.sap.xs.hdi-container
+
+ - name: uaa_VisualQuality
+   parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+   type: org.cloudfoundry.managed-service
+
+
+ - name: dest_VisualQuality
+   parameters:
+      service-plan: lite
+      service: destination
+   type: org.cloudfoundry.managed-service
+

@@ -1,0 +1,18 @@
+namespace VisualQuality.DB_Module;
+context Tables {
+    entity MODEL_MANAGER {
+        ID              : hana.VARCHAR(50) not null;
+        MODEL_NAME      : hana.VARCHAR(20);
+        MODEL_DESC      : hana.VARCHAR(100);
+        PLANT           : hana.VARCHAR(4);
+        WOEKCENTER      : hana.VARCHAR(30);
+        MATERIAL        : hana.VARCHAR(30);
+        MATERIAL_DESC   : hana.VARCHAR(100);
+        IMAGE_SET       : hana.VARCHAR(5000);
+        STATUS          : hana.VARCHAR(20);
+        CREATED_AT      : UTCTimestamp;
+        CREATED_BY      : hana.VARCHAR(100);
+        LASTMODIFIED_AT : UTCTimestamp;
+        LASTMODIFIED_BY : hana.VARCHAR(100);
+    };
+};
